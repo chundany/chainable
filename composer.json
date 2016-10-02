@@ -20,5 +20,10 @@
         "psr-4": {
             "Skybluesofa\\Chainable\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Skybluesofa\\Chainable\\Tests\\": "tests"
+        }
     }
 }

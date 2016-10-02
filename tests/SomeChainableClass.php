@@ -1,10 +1,6 @@
-# Chainable
-Allow for chainable, fluent method calls
-
-## Chaining Methods
-Using this class:
-```
 <?php
+namespace Skybluesofa\Chainable\Tests;
+
 use Skybluesofa\Chainable\Traits\Chainable;
 
 class SomeChainableClass {
@@ -32,18 +28,3 @@ class SomeChainableClass {
         ];
     }
 }
-```
-
-Now you can call these methods fluently:
-```
-SomeChainableClass::run();
-
-SomeChainableClass::setAbc('123')->run();
-
-SomeChainableClass::setAbc('123')->setMno('456')->run();
-```
-
-This will return an exception, as the 'setXyz' method does not exist.
-```
-SomeChainableClass::setXyz('123')->run();
-```
