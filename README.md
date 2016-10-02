@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/skybluesofa/chainable.svg?branch=master)](https://travis-ci.org/skybluesofa/chainable) [![Code Climate](https://codeclimate.com/github/skybluesofa/chainable/badges/gpa.svg)](https://codeclimate.com/github/skybluesofa/chainable) [![Test Coverage](https://codeclimate.com/github/skybluesofa/chainable/badges/coverage.svg)](https://codeclimate.com/github/skybluesofa/chainable/coverage) [![Total Downloads](https://img.shields.io/packagist/dt/skybluesofa/chainable.svg?style=flat)](https://packagist.org/packages/skybluesofa/chainable) [![Version](https://img.shields.io/packagist/v/skybluesofa/chainable.svg?style=flat)](https://packagist.org/packages/skybluesofa/chainable) [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE)
+
 # Chainable
 Allow for chainable, fluent method calls
 
