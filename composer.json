@@ -1,0 +1,24 @@
+{
+    "name": "skybluesofa/chainable",
+    "description": "Allow for chainable, fluent method calls",
+    "keywords": ["chainable", "fluent", "method", "object", "method_exists"],
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/skybluesofa/chainable",
+    "authors": [{
+        "name": "Dave Rogers",
+        "email": "connect@skybluesofa.com",
+        "homepage": "http://skybluesofa.com/"
+    }],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "require-dev": {
+        "codeclimate/php-test-reporter": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Skybluesofa\\Chainable\\": "src"
+        }
+    }
+}

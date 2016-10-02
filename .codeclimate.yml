@@ -1,0 +1,23 @@
+PHP: true
+
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - php
+  fixme:
+    enabled: true
+  phpmd:
+    enabled: true
+    exclude_paths:
+    - "vendor/"
+    checks:
+      CleanCode/StaticAccess:
+        enabled: false
+ratings:
+  paths:
+  - "**.php"
+exclude_paths:
+  - tests/
+  - "**/vendor/"
