@@ -26,8 +26,11 @@ class Sandwich {
     }
 
     private function removeCondiment($condiment=null) {
-      if ($condiment && in_array($condiment, $this->condiments)) {
-        unset($this->condiments[$condiment]);
+      if ($condiment) {
+        $key=array_search($condiment, $this->condiments);
+        if ($key!==false) {
+          unset($this->condiments[$key]);
+        }
       }
       return $this;
     }
@@ -55,8 +58,11 @@ class Sandwich {
     }
 
     public function removeVegetable($vegetable=null) {
-      if ($vegetable && in_array($vegetable, $this->vegetables)) {
-        unset($this->vegetables[$vegetable]);
+      if ($vegetable) {
+        $key=array_search($vegetable, $this->vegetables);
+        if ($key!==false) {
+          unset($this->vegetables[$key]);
+        }
       }
       return $this;
     }

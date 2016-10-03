@@ -39,6 +39,7 @@ class ChainableTest extends PHPUnit_Framework_TestCase {
 		$sandwich = Sandwich::withBread('wheat')->withCheese('swiss')->withMeat('ham')->addCondiment('mayo')->addCondiment('mustard')->removeCondiment('mustard')->grill(false)->make();
 		$this->assertEquals('wheat', $sandwich['bread']);
 		$this->assertContains('mayo', $sandwich['condiments']);
+		$this->assertNotContains('mustard', $sandwich['condiments']);
 		$this->assertEmpty($sandwich['vegetables']);
 		$this->assertEquals('swiss', $sandwich['cheese']);
 		$this->assertEquals('ham', $sandwich['meat']);
