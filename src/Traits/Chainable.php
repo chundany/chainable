@@ -16,6 +16,10 @@ trait Chainable
         }
     }
 
+    public static function chainableProxy() {
+      return new static;
+    }
+
     private function methodCallable($object=null, $method=null) {
         if (is_null($object)) {
             throw new \Exception('Chainable subject has not been provided.');
