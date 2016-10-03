@@ -4,48 +4,68 @@
 Allow for chainable, fluent method calls
 
 ## Chaining Methods
-Using this class:
+Check out the [Tests/Sandwich(https://github.com/skybluesofa/chainable/blob/master/tests/Sandwich.php] class. It gives a bunch of uses for the Chainable trait.
+
+Basic use of this trait:
+* Set the visibility for the chainable functions to 'private'
+* Ensure that you either modify the current class or return a cloned version of the class
+* Ensure that you return a reference to the class
 ```
-<?php
-use Skybluesofa\Chainable\Traits\Chainable;
-
-class SomeChainableClass {
-    use Chainable;
-
-    private $abc;
-    private $mno;
-    private $xyz;
-
-    private function setAbc($abc=null) {
-        $this->abc = $abc;
-        return $this;
-    }
-
-    private function setMno($mno=null) {
-        $this->mno = $mno;
-        return $this;
-    }
-
-    private function run() {
-        return [
-            'abc' => $this->abc,
-            'mno' => $this->mno,
-            'xyz' => $this->xyz,
-        ];
-    }
+private function withBread($breadType=null) {
+  $this->breadType = $breadType;
+  return $this;
 }
 ```
 
+### Calling fluent methods
 Now you can call these methods fluently:
 ```
-SomeChainableClass::run();
-
-SomeChainableClass::setAbc('123')->run();
-
-SomeChainableClass::setAbc('123')->setMno('456')->run();
+Sandwich::withBread('white')->
+  addCondiment('peanut butter')->
+  addCondiment('jelly')->
+  make();
+```
+or the same sandwich, but the methods are called in a different order:
+```
+Sandwich::addCondiment('peanut butter')->
+  withBread('white')->
+  addCondiment('jelly')->
+  make();
 ```
 
-This will return an exception, as the 'setXyz' method does not exist.
+### Modifying the output
+Any time up until you return something other than a reference to the chained class, you can modify what will be output:
 ```
-SomeChainableClass::setXyz('123')->run();
+Sandwich::withBread('wheat')->
+  addCondiment('peanut butter')->
+  addCondiment('grape jelly')->
+  withBread('white')->
+  removeCondiment('grape jelly')->
+  addCondiment('strawberry jelly')->
+  make();
+```
+
+### Missing methods
+This will return an exception, as the 'addBananas' method does not exist.
+```
+Sandwich::withBread('white')->
+  addCondiment('peanut butter')->
+  addBananas()->
+  make();
+```
+
+### Public methods
+This will return an error, as the 'addVegetable' method is not static:
+```
+Sandwich::addVegetable('lettuce')->
+  withBread('white')->
+  make();
+```
+
+To work around this, use the 'chainableProxy' method before calling 'addVegetable':
+```
+Sandwich::chainableProxy()->
+  addVegetable('lettuce')->
+  withBread('white')->
+  make();
 ```
