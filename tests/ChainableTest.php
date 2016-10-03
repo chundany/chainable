@@ -27,7 +27,7 @@ class ChainableTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse($sandwich['isGrilled']);
 	}
 	function test_grilled_cheese() {
-		$sandwich = Sandwich::withBread('white')->withCheese('american')->grill()->make();
+		$sandwich = Sandwich::withBread('white')->withCheese('american')->addVegetable('onion')->removeVegetable('onion')->grill()->make();
 		$this->assertEquals('white', $sandwich['bread']);
 		$this->assertEmpty($sandwich['condiments']);
 		$this->assertEmpty($sandwich['vegetables']);
@@ -36,7 +36,7 @@ class ChainableTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($sandwich['isGrilled']);
 	}
 	function test_ham_and_swiss_on_wheat() {
-		$sandwich = Sandwich::withBread('wheat')->withCheese('swiss')->withMeat('ham')->addCondiment('mayo')->grill(false)->make();
+		$sandwich = Sandwich::withBread('wheat')->withCheese('swiss')->withMeat('ham')->addCondiment('mayo')->addCondiment('mustard')->removeCondiment('mustard')->grill(false)->make();
 		$this->assertEquals('wheat', $sandwich['bread']);
 		$this->assertContains('mayo', $sandwich['condiments']);
 		$this->assertEmpty($sandwich['vegetables']);
