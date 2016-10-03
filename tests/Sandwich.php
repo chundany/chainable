@@ -26,7 +26,7 @@ class Sandwich {
     }
 
     private function removeCondiment($condiment=null) {
-      if ($condiment && isset($this->condiments[$condiment])) {
+      if ($condiment && in_array($condiment, $this->condiments)) {
         unset($this->condiments[$condiment]);
       }
       return $this;
@@ -55,7 +55,7 @@ class Sandwich {
     }
 
     public function removeVegetable($vegetable=null) {
-      if ($vegetable && isset($this->vegetables[$vegetable])) {
+      if ($vegetable && in_array($vegetable, $this->vegetables)) {
         unset($this->vegetables[$vegetable]);
       }
       return $this;
