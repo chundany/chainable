@@ -20,18 +20,22 @@ trait Chainable
       return new static;
     }
 
-    private function methodCallable($object=null, $method=null) {
-        if (is_null($object)) {
-            throw new \Exception('Chainable subject has not been provided.');
-        }
+    /**
+     * @param mixed $object
+     * @param string $method
+     * @return bool
+     * @throws \Exception
+     */
+    private function methodCallable($object, $method) {
         if (!is_object($object)) {
             throw new \Exception('Chainable subject is not an object.');
         }
 
         $class = get_class($object);
 
-        if (is_null($method)) {
-            throw new \Exception("Chainable method not provided for object {$class}.");
+        if (!is_string($method)) {
+            $type = gettype($method);
+            throw new \Exception("Chainable method name must be a string. {$type} was provided for object {$class}.");
         }
         if (!method_exists($object, $method)) {
             throw new \Exception("Chainable method does not exist on object {$class}.");
