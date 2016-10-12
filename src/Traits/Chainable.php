@@ -4,16 +4,14 @@ namespace Skybluesofa\Chainable\Traits;
 trait Chainable
 {
     public function __call($method, $parameters) {
-        if ($this->methodCallable($this, $method)) {
-            return call_user_func_array([$this, $method], $parameters);
-        }
+        $this->checkMethodCallable($this, $method);
+        return call_user_func_array([$this, $method], $parameters);
     }
 
     public static function __callStatic($method, $parameters) {
         $instance = new static;
-        if ($instance->methodCallable($instance, $method)) {
-            return call_user_func_array([$instance, $method], $parameters);
-        }
+        $instance->checkMethodCallable($instance, $method);
+        return call_user_func_array([$instance, $method], $parameters);
     }
 
     public static function chainableProxy() {
@@ -26,7 +24,7 @@ trait Chainable
      * @return bool
      * @throws \Exception
      */
-    private function methodCallable($object, $method) {
+    private function checkMethodCallable($object, $method) {
         if (!is_object($object)) {
             throw new \Exception('Chainable subject is not an object.');
         }
@@ -40,7 +38,5 @@ trait Chainable
         if (!method_exists($object, $method)) {
             throw new \Exception("Chainable method does not exist on object {$class}.");
         }
-
-        return true;
     }
 }

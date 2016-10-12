@@ -24,7 +24,7 @@ class ChainableTest extends PHPUnit_Framework_TestCase {
 	public function test_method_called_on_non_object_throws_exception(){
 		$sandwich = new Sandwich();
 		$reflection = new ReflectionObject($sandwich);
-		$method = $reflection->getMethod('methodCallable');
+		$method = $reflection->getMethod('checkMethodCallable');
 		$method->setAccessible(true);
 		$method->invokeArgs($sandwich, [1, 'method']);
 	}
@@ -36,7 +36,7 @@ class ChainableTest extends PHPUnit_Framework_TestCase {
 	public function test_method_called_with_non_string_method_name_throws_exception(){
 		$sandwich = new Sandwich();
 		$reflection = new ReflectionObject($sandwich);
-		$method = $reflection->getMethod('methodCallable');
+		$method = $reflection->getMethod('checkMethodCallable');
 		$method->setAccessible(true);
 		$method->invokeArgs($sandwich, [$sandwich, 5]);
 	}
