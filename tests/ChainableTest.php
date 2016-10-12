@@ -16,6 +16,32 @@ class ChainableTest extends PHPUnit_Framework_TestCase {
 	 function test_missing_method() {
 		$sandwich = Sandwich::addBananas()->run();
 	}
+
+	/**
+	 * @expectedException Exception
+	 * @expectedExceptionMessage Chainable subject is not an object
+	 */
+	public function test_method_called_on_non_object_throws_exception(){
+		$sandwich = new Sandwich();
+		$reflection = new ReflectionObject($sandwich);
+		$method = $reflection->getMethod('methodCallable');
+		$method->setAccessible(true);
+		$method->invokeArgs($sandwich, [1, 'method']);
+	}
+
+
+	/**
+	 * @expectedException Exception
+	 * @expectedExceptionMessage Chainable method name must be a string. integer was provided for object Skybluesofa\Chainable\Tests\Sandwich.
+	 */
+	public function test_method_called_with_non_string_method_name_throws_exception(){
+		$sandwich = new Sandwich();
+		$reflection = new ReflectionObject($sandwich);
+		$method = $reflection->getMethod('methodCallable');
+		$method->setAccessible(true);
+		$method->invokeArgs($sandwich, [$sandwich, 5]);
+	}
+
 	function test_peanut_butter_and_jelly() {
 		$sandwich = Sandwich::withBread('white')->addCondiment('peanut butter')->addCondiment('jelly')->make();
 		$this->assertEquals('white', $sandwich['bread']);
